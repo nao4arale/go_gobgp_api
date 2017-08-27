@@ -64,7 +64,7 @@ root@ubu-client:/go_gobgp_api/go_gobgp_client# go run main.go
 Do you want to do?(add/del): add
 destination_ip(MUST): 192.168.0.1/32
 source_ip(MUST): 10.0.0.1/32
-protocols(tcp/udp/unknown/any): tcp
+protocols(tcp/udp/any): tcp
 destion_port: 80
 source_port: 53
 Do you want to then?(accept/discard/rate-limit <ratelimit>): accept
