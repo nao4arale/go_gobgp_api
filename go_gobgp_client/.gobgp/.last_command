@@ -1,1 +1,1 @@
-{"command":"/root/go/bin/gobgp global rib -a ipv4-flowspec del match destination 3.3.3.3/32 source 4.4.4.4/32 then accept"}
+{"command":"/root/go/bin/gobgp global rib -a ipv4-flowspec add match destination 192.168.0.1/32 source 10.0.0.1/32 protocol tcp  destination-port =='80'  source-port =='53'  then accept"}

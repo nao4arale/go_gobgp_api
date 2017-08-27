@@ -33,7 +33,7 @@ func check_action(act_q string) string {
 	}
 }
 
-func check_protocols(proto_q string) string {
+func check_protocols(proto_q string)  string {
 	for {
 		precli_protocols := bufio.NewReader(os.Stdin)
 		fmt.Print(proto_q)
@@ -67,13 +67,17 @@ func check_then(then_q string) string {
 	for {
 		precli_then := bufio.NewReader(os.Stdin)
 		fmt.Print(then_q)
-		cli_then, _ := precli_then.ReadString('\n')
+		cli_then, err := precli_then.ReadString('\n')
+			if err != nil {
+			fmt.Println(err)
+				os.Exit(1)	}
 		cli_then = strings.Trim(cli_then, "\n")
 		 if strings.Contains(cli_then, " "){
 		  rateary := strings.SplitN(cli_then, " ", 2)
 		  r := regexp.MustCompile(`^rate-limit$`)
 		   if ! r.MatchString(rateary[0]) {
-                   continue
+//		   if ! r.MatchString(cli_then) {
+	                  continue
 		   }
 		   if ! IsNUMBER(rateary[1]) {
 			fmt.Println("\nSorry,cannot understand.")
@@ -82,15 +86,18 @@ func check_then(then_q string) string {
 		   } else {
 			return cli_then
 		  }
-		 }
+		}
 		switch cli_then {
 		case "accept":
-			break
+			return cli_then
 		case "discard":
-			break
-//		case Re_ratelimit.MatchString(cli_then):
-//			break
+			return cli_then
+//		case r.MatchString(cli_then):
+//			return cli_then
 		default:
+//			if r.MatchString(cli_then) {
+//			return cli_then
+//			}
 			fmt.Println("\nSorry,cannot understand.")
 			fmt.Println("Please,type the \"accept\" or \"discard\" or \"rate-limit <ratelimit>\"\n")
 			continue
@@ -99,6 +106,7 @@ func check_then(then_q string) string {
 		return cli_then
 	}
 }
+
 /*
 func check_neighbor(nei_q string) string {
 	var neigh string
