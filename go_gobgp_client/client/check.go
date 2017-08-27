@@ -44,8 +44,8 @@ func check_protocols(proto_q string)  string {
 			break
 		case "udp":
 			break
-		case "unknown":
-			break
+//		case "unknown":
+//			break
 		case "any":
 			cli_protocols = ""
 			break
@@ -56,7 +56,7 @@ func check_protocols(proto_q string)  string {
 			continue
 		default:
 			fmt.Println("\nSorry,cannot understand.")
-			fmt.Println("Please,type the \"tcp\" , \"udp\" , \"unknown\" , or \"any\"\n")
+			fmt.Println("Please,type the \"tcp\" , \"udp\" , or \"any\"\n")
 			continue
 		}
 		return cli_protocols

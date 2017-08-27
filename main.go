@@ -52,10 +52,10 @@ var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
     return
   }
 
-//  if r.Header.Get("Content-Type") != "application/json" {
-//    w.WriteHeader(http.StatusBadRequest)
-//    return
-//  }
+  if r.Header.Get("Content-Type") != "application/json" {
+    w.WriteHeader(http.StatusBadRequest)
+    return
+  }
 /*
   //To allocate slice for request body
   length, err := strconv.Atoi(r.Header.Get("Content-Length"))

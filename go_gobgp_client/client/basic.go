@@ -100,30 +100,31 @@ func Examples() {
 Examples(1):
  This Scriptes BGP Flow Spec command is for example...
 
-     Do you want to do?(announce/withdraw): announce
-     source IP(MUST)?: 10.0.0.0/24
-     destination IP(MUST): 192.168.0.0/24
-     protocols: tcp
-     source port: 80
-     dest port: 53
-     Do you want to flowspec action?(accept/discard/rate-limit <ratelimit>): rate-limit 1000000
+     Do you want to do?(add/del): add     
+     destination_ip(MUST): 10.0.0.0/24
+     source_ip(MUST): 192.168.0.0/24
+     protocols(tcp/udp/any): udp
+     destion_port: 80
+     source_port: 53
+     Do you want to then?(accept/discard/rate-limit <ratelimit>): discard
+
 
 Results(1):
-     Post Command: announce flow route source 10.0.0.0/24 destination 192.168.0.0/24 protocol [ tcp ] source-port [ =80 ] destination-port [ =53 ] rate-limit 1000000 
+     Post Command: gobgp global rib -a ipv4-flowspec add match destination 10.0.0.0/24 source 192.168.0.0/24 protocol udp destination-port =='80' source-port =='53' then discard 
 
 Examples(2):
  This Scriptes BGP Flow Spec command is for example...
 
-     Do you want to do?(announce/withdraw): withdraw
-     source IP(MUST)?: 20.0.0.1/32
-     destination IP(MUST)?: 68.1.212.23/32
-     protocols:
-     source port:
-     dest port:
-     Do you want to flowspec action?(accept/discard/rate-limit <ratelimit>): discard 
+     Do you want to do?(add/del): add
+     destination_ip(MUST): 3.3.3.3/32
+     source_ip(MUST): 10.0.0.1/24
+     protocols(tcp/udp/any): any
+     destion_port: 
+     source_port: 
+     Do you want to then?(accept/discard/rate-limit <ratelimit>): rate-limit 1000000
 
 Results(2):
-     Post Command: withdraw flow route source 20.0.0.1/32 destination 68.1.212.23/32 discard
+     Post Command: gobgp global rib -a ipv4-flowspec add match destination 3.3.3.3/32 source 10.0.0.1/24 then rate-limit 1000000
 `
 	fmt.Printf(msg)
 	os.Exit(0)

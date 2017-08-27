@@ -76,15 +76,15 @@ func curl_get(values url.Values, auth1 string, auth2 string) string {
 func curl_post_command(values url.Values, hash string) {
 
 	jsondata := bytes.NewBuffer([]byte(cat(LCOMMANDFILE)))
-
-	req, err := http.NewRequest("POST", GOBGP_COMMAND, jsondata)
+	 req, err := http.NewRequest("POST", GOBGP_COMMAND, jsondata)
 	if err != nil {
 		fmt.Println(err)
 	}
 //	req.SetBasicAuth(hash, "unused")
-//	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-Type", "application/json")
 	hash = "Bearer " + hash
-        req.Header.Set("Authorication", hash)
+        req.Header.Set("Authorization", hash)
+//	 req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {

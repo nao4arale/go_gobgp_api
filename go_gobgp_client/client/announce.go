@@ -22,7 +22,7 @@ func Announce() {
         cli_action := check_action("Do you want to do?(add/del): ")
         cli_dest_ip := address_checker("destination_ip(MUST): ")
 	cli_source_ip := address_checker("source_ip(MUST): ")
-        cli_protocols := check_protocols("protocols(tcp/udp/unknown/any): ")
+        cli_protocols := check_protocols("protocols(tcp/udp/any): ")
         cli_dest_port := numbers_checker("destion_port: ")
 	cli_source_port := numbers_checker("source_port: ")
 	cli_then := check_then("Do you want to then?(accept/discard/rate-limit <ratelimit>): ")
@@ -34,15 +34,15 @@ func Announce() {
 	 if cli_protocols == "" {
 	 protocols = ""
 	}
-	dest_port := " destination-port =='" + cli_dest_port + "' "
+	dest_port := "destination-port =='" + cli_dest_port + "' "
          if cli_dest_port == "" {
          dest_port = ""
 	}
-	source_port := " source-port =='" + cli_source_port + "' "
+	source_port := "source-port =='" + cli_source_port + "' "
 	 if cli_source_port == "" {
 	 source_port = ""
 	}
-	then := " then " + cli_then
+	then := "then " + cli_then
 
         precmd := "gobgp global rib -a ipv4-flowspec" + action + " match" + dest_ip + source_ip + protocols + dest_port + source_port + then
 
