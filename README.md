@@ -6,7 +6,8 @@ You send the Curl with GoBGP's CLI to the REMOTE GoBGP, Run That's CLI on the Go
 # Examples(Using shell curl command)
 
 ```bash
-root@ubu-client:~# curl -u user:pass -v  http://localhost:3000/api/token*   Trying 127.0.0.1...
+root@ubu-client:~# curl -u user:pass -v  http://localhost:3000/api/token
+*   Trying 127.0.0.1...
 * Connected to localhost (127.0.0.1) port 3000 (#0)
 * Server auth using Basic with user 'user'
 > GET /api/token HTTP/1.1
