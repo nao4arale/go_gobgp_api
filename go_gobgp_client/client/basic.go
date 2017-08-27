@@ -125,6 +125,7 @@ Examples(2):
 
 Results(2):
      Post Command: gobgp global rib -a ipv4-flowspec add match destination 3.3.3.3/32 source 10.0.0.1/24 then rate-limit 1000000
+
 `
 	fmt.Printf(msg)
 	os.Exit(0)
