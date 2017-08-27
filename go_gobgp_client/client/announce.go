@@ -29,8 +29,8 @@ func Announce() {
 //	vrf	:= "vrf " + cli_vrf
 	action := cli_action
         dest_ip := " destination " + cli_dest_ip
-	source_ip := " source " + cli_source_ip
-	protocols := " protocol " + cli_protocols + " "
+	source_ip := " source " + cli_source_ip +" "
+	protocols := "protocol " + cli_protocols + " "
 	 if cli_protocols == "" {
 	 protocols = ""
 	}

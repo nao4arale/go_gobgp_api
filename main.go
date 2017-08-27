@@ -3,9 +3,10 @@ package main
 import (
 //  "bytes"
 //  "encoding/json"
+  "strconv"
   "io/ioutil"
   "strings"
-//  "time"
+  "time"
   "net/http"
   "github.com/gorilla/mux"
   jwt "github.com/dgrijalva/jwt-go"
@@ -147,14 +148,18 @@ var GetTokenHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
     claims := token.Claims.(jwt.MapClaims)
 
     /* Set token claims */
+    const (
+	expiredTime int = 72
+	)
     claims["admin"] = true
-    claims["name"] = "Ado Kukic"
-//    claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+    claims["name"] = "nya hoke"
+    claims["exp"] = time.Now().Add(time.Hour * time.Duration(expiredTime)).Unix()
     /* Sign the token with our secret */
     tokenString, _ := token.SignedString(mySigningKey)
-    expiredTime := "24"
+    expiredTime_s := strconv.Itoa(expiredTime)
+//    expiredTime = strconv.Itoa(expiredTime)
     /* Finally, write the token to the browser window */
-    TokenData := `{"token":` + `"` + tokenString + `", ` + `"expired":"` + expiredTime +`"}`
+    TokenData := `{"token":` + `"` + tokenString + `", ` + `"expired":"` + expiredTime_s +`"}`
     w.Write([]byte(TokenData+"\n"))
 
     }
