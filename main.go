@@ -183,7 +183,7 @@ func main() {
   r.Handle("/api/token", GetTokenHandler).Methods("GET")
   r.Handle("/api/status", StatusHandler).Methods("GET")
   r.Handle("/api/jwkstatus",  jwtMiddleware.Handler(JwkStatusHandler)).Methods("GET")
-  r.Handle("/api/command", ReceiveCommandHandler).Methods("POST")
+//  r.Handle("/api/command", ReceiveCommandHandler).Methods("POST")
  r.Handle("/api/command", jwtMiddleware.Handler(ReceiveCommandHandler)).Methods("POST")
 // r.Handle("test", TestHandler).Methods("GET")
 
