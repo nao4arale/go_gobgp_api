@@ -1,0 +1,1 @@
+{"command":"/root/go/bin/gobgp global rib -a ipv4-flowspec del match destination 3.3.3.3/32 source 4.4.4.4/32 then accept"}
