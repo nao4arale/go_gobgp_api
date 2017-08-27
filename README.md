@@ -3,6 +3,10 @@ This Running REST API over GoBGP.
 You send the Curl with GoBGP's CLI to the REMOTE GoBGP, Run That's CLI on the GoBGPD.
 (On the Restful Auth is JWT.)
 
+# go_gobgp_client
+This Support tool that Gobgp's CLI sending to the HTTP API.
+Now, Only Support BGP ipv4 flowspec.
+
 # Examples(Using shell curl command)
 
 ```bash
