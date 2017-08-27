@@ -47,11 +47,46 @@ root@ubu-gobgpd:~# /root/go/bin/gobgp global rib -a ipv4
 
 # Examples(Using go_gobgp_client)
 
-root@ubu-bgp:/go-honban/go_gobgp_api/go_gobgp_client# go run main.go 
+root@ubu-client:/go_gobgp_api/go_gobgp_client# go run main.go 
 
 #########################
   Gobgp Flowspec client
 #########################
 
 Do you want to do?(add/del): add
+destination_ip(MUST): 192.168.0.1/32
+source_ip(MUST): 10.0.0.1/32
+protocols(tcp/udp/unknown/any): tcp
+destion_port: 80
+source_port: 53
+Do you want to then?(accept/discard/rate-limit <ratelimit>): accept
+test
+test2
+test3
 
+##########################
+    check the hash key
+##########################
+
+ 100 / 100 [========================================================] 100.00% 1s
+ Check is done.
+
+OK,Current HASH key is not still changed.
+Go to Next Process.
+
+######################################################################
+
+    Current Hash Code: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwibmFtZSI6IkFkbyBLdWtpYyJ9.qsKN2OIk6AW4O4PMgLjyeBYx0BCG7Iopvei-fNuUivo
+	 Post Command: gobgp global rib -a ipv4-flowspec add match destination 192.168.0.1/32 source 10.0.0.1/32 protocol tcp  destination-port =='80'  source-port =='53'  then accept
+
+######################################################################
+
+Do you want to POST this command??(y/n): y
+
+####################
+  Working is Done.
+####################
+
+root@ubu-bgpd:~# /root/go/bin/gobgp global rib -a ipv4-flowspec
+   Network                                                                                                      Next Hop             AS_PATH              Age        Attrs
+*> [destination:192.168.0.1/32][source:10.0.0.1/32][protocol:==tcp ][destination-port: ==80][source-port: ==53] fictitious                                00:02:07   [{Origin: ?}]
