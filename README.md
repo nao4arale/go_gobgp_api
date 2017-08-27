@@ -1,6 +1,6 @@
 # go_gobgp_api
 This Running REST API over GoBGP.
-Curl with GoBGP's CLI this HTTP API, REMOTE GoBGP Run That's Command.
+You send the Curl with GoBGP's CLI to the REMOTE GoBGP, Run That's CLI on the GoBGPD.
 (On the Restful Auth is JWT.)
 
 # Examples(Using shell curl command)
