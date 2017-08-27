@@ -68,9 +68,6 @@ protocols(tcp/udp/unknown/any): tcp
 destion_port: 80
 source_port: 53
 Do you want to then?(accept/discard/rate-limit <ratelimit>): accept
-test
-test2
-test3
 
 ##########################
     check the hash key
