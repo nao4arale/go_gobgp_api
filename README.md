@@ -5,6 +5,7 @@ Curl with GoBGP's CLI this HTTP API, REMOTE GoBGP Run That's Command.
 
 # Examples(Using shell curl command)
 
+```bash
 root@ubu-client:~# curl -u user:pass -v  http://localhost:3000/api/token*   Trying 127.0.0.1...
 * Connected to localhost (127.0.0.1) port 3000 (#0)
 * Server auth using Basic with user 'user'
@@ -40,13 +41,15 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 SI6IkFkbyBLdWtpYyJ9.qsKN2OIk6AW4O4PMgLjyeBYx0BCG7Iopvei-fNuUivo
 > Content-Length: 119
 > Content-Type: application/x-www-form-urlencoded
-
+```
+```bash
 root@ubu-gobgpd:~# /root/go/bin/gobgp global rib -a ipv4
    Network              Next Hop             AS_PATH              Age        Attrs
 *> 10.0.0.1/32          0.0.0.0                                   00:02:01   [{Origin: i} {Med: 10} {LocalPref: 2000} {Communities: 100:100}]
-
+```
 # Examples(Using go_gobgp_client)
 
+```bash
 root@ubu-client:/go_gobgp_api/go_gobgp_client# go run main.go 
 
 #########################
@@ -87,6 +90,10 @@ Do you want to POST this command??(y/n): y
   Working is Done.
 ####################
 
+```
+
+```bash
 root@ubu-bgpd:~# /root/go/bin/gobgp global rib -a ipv4-flowspec
    Network                                                                                                      Next Hop             AS_PATH              Age        Attrs
 *> [destination:192.168.0.1/32][source:10.0.0.1/32][protocol:==tcp ][destination-port: ==80][source-port: ==53] fictitious                                00:02:07   [{Origin: ?}]
+```
