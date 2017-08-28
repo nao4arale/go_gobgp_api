@@ -54,11 +54,12 @@ var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
+/*
 	if r.Header.Get("Content-Type") != "application/json" {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+*/
 	var js = strings.NewReader(execute(r))
 	var s string
 		if err := scan.ScanJSON(js, "/command/", &s); err != nil {
@@ -142,10 +143,13 @@ func runCmdStr(cmdstr string) error {
     case 0:
         // nil
         return nil
+	fmt.Println("No Command?")
     case 1:
         // no option
+	// for Debug
         fmt.Println(c[0])
         err = sh.Command(c[0]).Run()
+	fmt.Println(" ### done. ###")
     default:
 	/*                                                             */
         /* one or more option(It's main).                              */
@@ -154,11 +158,13 @@ func runCmdStr(cmdstr string) error {
 	/* http://qiita.com/tanksuzuki/items/9205ff70c57c4c03b5e5      */
         /* https://golang.org/doc/faq#convert_slice_of_interface       */
 	/*							       */
-        s := make([]interface{}, len(c))
-        for i, v := range c {
-        s[i] = v
-        }
+	fmt.Print(c[:])
+	s := make([]interface{}, len(c))
+		for i, v := range c {
+		s[i] = v
+		}
         err = sh.Command(c[0], s[1:]...).Run()
+	fmt.Println(" ### done. ###")
 	}
     if err != nil {
         return err
