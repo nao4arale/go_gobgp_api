@@ -25,6 +25,7 @@ func curl_check_jwt(auth1 string, auth2 string) bool {
         if resp.StatusCode == 200 {
                 return true
         }
+	defer resp.Body.Close()
         return false
 }
 
@@ -44,6 +45,7 @@ func curl_check(auth1 string, auth2 string) bool {
 	if resp.StatusCode == 200 {
 		return true
 	}
+	defer resp.Body.Close()
 	return false
 }
 
