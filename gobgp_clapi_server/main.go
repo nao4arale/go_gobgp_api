@@ -60,6 +60,8 @@ var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
 		return
 	}
 */
+	w.Header().Set("Content-type", "application/json")
+
 	var js = strings.NewReader(execute(r))
 	var s string
 		if err := scan.ScanJSON(js, "/command/", &s); err != nil {
