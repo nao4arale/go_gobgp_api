@@ -10,8 +10,8 @@ import (
 	"strings"
 )
 
-func curl_check_jwk(auth1 string, auth2 string) bool {
-        req, err := http.NewRequest("GET", GOBGP_JWKSTATUS, nil)
+func curl_check_jwt(auth1 string, auth2 string) bool {
+        req, err := http.NewRequest("GET", GOBGP_JWTSTATUS, nil)
         if err != nil {
                 return false
         }

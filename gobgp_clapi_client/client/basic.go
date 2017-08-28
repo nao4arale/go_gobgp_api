@@ -11,7 +11,7 @@ import (
 const (
 	GOBGPHOME         = "./.gobgp"
         GOBGP_STATUS    = "http://localhost:3000/api/status"
-	GOBGP_JWKSTATUS	= "http://localhost:3000/api/jwkstatus"
+	GOBGP_JWTSTATUS	= "http://localhost:3000/api/jwtstatus"
 	GOBGP_TOKEN     = "http://localhost:3000/api/token"
 	GOBGP_COMMAND   = "http://localhost:3000/api/command"
 	HASH_KEY         = "./.gobgp/.ghash_key"

@@ -24,7 +24,7 @@ func check_hash() string {
 
 //	HASHCHECK := curl_check(hash, "unused")
         hash_tmp := "Bearer " + hash
-        HASHCHECK := curl_check_jwk("Authorization", hash_tmp)
+        HASHCHECK := curl_check_jwt("Authorization", hash_tmp)
 	if HASHCHECK {
          fmt.Println("\nOK,Current HASH key is not still changed.")
          fmt.Println("Go to Next Process.")

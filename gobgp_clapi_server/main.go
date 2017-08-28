@@ -39,8 +39,8 @@ var StatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request
  }
 })
 
-var JwkStatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-	w.Write([]byte("JWK is up and running\n"))
+var JwtStatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+	w.Write([]byte("JWT is up and running\n"))
 })
 
 /* Debug Hundler
@@ -181,7 +181,7 @@ func main() {
 
   r.Handle("/api/token", GetTokenHandler).Methods("GET")
   r.Handle("/api/status", StatusHandler).Methods("GET")
-  r.Handle("/api/jwkstatus",  jwtMiddleware.Handler(JwkStatusHandler)).Methods("GET")
+  r.Handle("/api/jwtstatus",  jwtMiddleware.Handler(JwtStatusHandler)).Methods("GET")
 //  r.Handle("/api/command", ReceiveCommandHandler).Methods("POST")
  r.Handle("/api/command", jwtMiddleware.Handler(ReceiveCommandHandler)).Methods("POST")
 // r.Handle("test", TestHandler).Methods("GET")
