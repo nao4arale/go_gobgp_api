@@ -1,10 +1,10 @@
 # gobgp_clapi_server
-This Running REST API over GoBGP.
-You send the Curl with GoBGP's CLI to the REMOTE GoBGP, Run That's CLI on the GoBGPD.
-(On the Restful Auth is JWT.)
+This Running REST API GoBGP together.
+You send commands the GoBGP's CLI into the Json's code to the REMOTE GoBGP, Run That's CLI on the Gobgpd!!
+(With the restful auth Token, JWT.)
 
 # gobgp_clapi_lient
-This Support tool that Gobgp's CLI sending to the HTTP API.
+This Support tool this HTTP API.
 Now, Only Support BGP ipv4 flowspec.
 
 ## What you need
