@@ -5,10 +5,12 @@ You send commands the GoBGP's CLI into the Json's code to the REMOTE GoBGP, Run 
 
 # gobgp_clapi_lient
 This Support tool this HTTP API.
+It's very simple 
 Now, Only Support BGP ipv4 flowspec.
 
-#### supportted client module
+### supportted client module
 - sytax check(ex.address format...)
+- token check(if not token is still changed, no password and DO the announce)
 - withdraw last announce prefix(opt. --withdraw/-w)
 - logging announce prefix
 
