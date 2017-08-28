@@ -67,7 +67,7 @@ var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
 	runCmdStr(s)
 
 	w.WriteHeader(http.StatusOK)
- 
+
 })
 
   /* Set up a global string for our secret */
@@ -81,6 +81,8 @@ var GetTokenHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
         w.Write([]byte("401 Unauthorized\n"))
         return
     } else {
+    w.Header().Set("Content-type", "application/json")
+
     /* Create the token */
     token := jwt.New(jwt.SigningMethodHS256)
 
