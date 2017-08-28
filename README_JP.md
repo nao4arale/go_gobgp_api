@@ -17,7 +17,7 @@ Tokenコードとか、BGPのコマンドとかを手打ちで打つなんて人
 - ログ機能
 
 ## 用意するもの
-- [Golang](https://golang.org/) (You may use later 1.7)
+- [Golang](https://golang.org/) (contextを使うのでバージョン1.7からでお願いします。)
 - [Go BGP](https://github.com/osrg/gobgp/releases/latest).
 - [Throw Go BGP CLI](https://github.com/osrg/gobgp/blob/master/docs/sources/cli-command-syntax.md)
 
