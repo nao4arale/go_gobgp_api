@@ -1,11 +1,16 @@
 # gobgp_clapi_server
 This Running REST API GoBGP together.  
-You send commands the GoBGP's CLI into the Json's code to the REMOTE GoBGP, Run That's CLI on the Gobgpd!!
+You send commands the GoBGP's CLI into the Json's code to the REMOTE GoBGP, Run That's CLI on the Gobgpd!!  
 (With the restful auth Token, JWT.)
 
 # gobgp_clapi_lient
 This Support tool this HTTP API.
 Now, Only Support BGP ipv4 flowspec.
+
+#### supportted client module
+- sytax check(ex.address format...)
+- withdraw last announce prefix(opt. --withdraw/-w)
+- logging announce prefix
 
 ## What you need
 - [Golang](https://golang.org/) (You may use later 1.7)
