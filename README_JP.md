@@ -9,6 +9,12 @@ Tokenコードとか、BGPのコマンドとかを手打ちで打つなんて人
 そんなときはGoで書かれたこのクライアントソフトでやれば一連の動作が対話式でちょちょいと出来ます。
 今のコードではBGP ipv4 flowspecだけサポートなう。
 
+### その他gobgp_clapi_lientでサポートされた機能
+- 構文チェック(ただの構文チェックじゃなく、アドレスがx.x.x.x/xxの形か等も判定します)
+- トークンチェック(トークンが変わってなければ過去取得したトークンをそのまま使えます)
+- 最後に広報した経路をすぐにwithdrawできます(-w/--withdrawオプション)
+- ログ機能
+
 ## 用意するもの
 - [Golang](https://golang.org/) (You may use later 1.7)
 - [Go BGP](https://github.com/osrg/gobgp/releases/latest).
