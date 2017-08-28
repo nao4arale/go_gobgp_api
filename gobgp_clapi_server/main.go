@@ -1,23 +1,21 @@
 package main
 
 import (
-//  "bytes"
-//  "encoding/json"
   "strconv"
   "io/ioutil"
   "strings"
   "time"
   "net/http"
+  "fmt"
+  "os"
+  "log"
   "github.com/gorilla/mux"
   jwt "github.com/dgrijalva/jwt-go"
- "github.com/auth0/go-jwt-middleware"
-    "os"
-    "log"
-    "github.com/joho/godotenv"
-    "fmt"
-    "github.com/codeskyblue/go-sh"
-    "github.com/mattn/go-shellwords"
-    "github.com/mattn/go-scan"
+  "github.com/auth0/go-jwt-middleware"
+  "github.com/joho/godotenv"
+  "github.com/codeskyblue/go-sh"
+  "github.com/mattn/go-shellwords"
+  "github.com/mattn/go-scan"
 )
 
 func Env_load() {
@@ -29,18 +27,18 @@ func Env_load() {
 }
 
 var StatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-if checkAuth(r) == false {
+	if checkAuth(r) == false {
         w.Header().Set("WWW-Authenticate", `Basic realm="MY REALM"`)
         w.WriteHeader(401)
         w.Write([]byte("401 Unauthorized\n"))
         return
     } else {
-  w.Write([]byte("API is up and running\n"))
+	w.Write([]byte("API is up and running\n"))
  }
 })
 
 var JwkStatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
- w.Write([]byte("JWK is up and running\n"))
+	w.Write([]byte("JWK is up and running\n"))
 })
 
 //var TestHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
@@ -48,87 +46,25 @@ var JwkStatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Requ
 
 var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
   //Validate request
-  if r.Method != "POST" {
-    w.WriteHeader(http.StatusBadRequest)
-    return
-  }
-
-  if r.Header.Get("Content-Type") != "application/json" {
-    w.WriteHeader(http.StatusBadRequest)
-    return
-  }
-/*
-  //To allocate slice for request body
-  length, err := strconv.Atoi(r.Header.Get("Content-Length"))
-  if err != nil {
-    w.WriteHeader(http.StatusInternalServerError)
-    return
-  }
-
-  body := make([]byte, length)
-  length, err = r.Body.Read(body)
-  if err != nil && err != io.EOF {
-    w.WriteHeader(http.StatusInternalServerError)
-    return
-  }
-
-  //parse json
-  var jsonBody map[string]interface{}
-  err = json.Unmarshal(body[:length], &jsonBody)
-  if err != nil {
-    w.WriteHeader(http.StatusInternalServerError)
-    return
-  }
-*/
-        var js = strings.NewReader(execute(r))
-        var s string
-
-        if err := scan.ScanJSON(js, "/command/", &s); err != nil {
-        }
-    runCmdStr(s)
-  w.WriteHeader(http.StatusOK)
-})
-
-func execute(resp *http.Request) string {
-        // request bodyを文字列で取得
-        // ioutil.ReadAllを使う
-        b, err := ioutil.ReadAll(resp.Body)
-        if err == nil {
-                return string(b)
-        }
-        return ""
-}
-
-
-func runCmdStr(cmdstr string) error {
-    // 文字列をコマンド、オプション単位でスライス化する
-    c, err := shellwords.Parse(cmdstr)
-    if err != nil {
-        return err
-    }
-    switch len(c) {
-    case 0:
-        // 空の文字列が渡された場合
-        return nil
-    case 1:
-        // コマンドのみを渡された場合
-        fmt.Println(c[0])
-        err = sh.Command(c[0]).Run()
-    default:
-        // コマンド+オプションを渡された場合
-        // オプションは可変長でexec.Commandに渡す
-	// https://golang.org/doc/faq#convert_slice_of_interface
-        s := make([]interface{}, len(c))
-        for i, v := range c {
-        s[i] = v
-        }
-        err = sh.Command(c[0], s[1:]...).Run()
+	if r.Method != "POST" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
-    if err != nil {
-        return err
-    }
-    return nil
-}
+
+	if r.Header.Get("Content-Type") != "application/json" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	var js = strings.NewReader(execute(r))
+	var s string
+		if err := scan.ScanJSON(js, "/command/", &s); err != nil {
+			}
+		
+	runCmdStr(s)
+  
+	w.WriteHeader(http.StatusOK)
+  
+})
 
   /* Set up a global string for our secret */
 var mySigningKey = []byte(os.Getenv("SECRET"))
@@ -157,13 +93,12 @@ var GetTokenHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
     /* Sign the token with our secret */
     tokenString, _ := token.SignedString(mySigningKey)
     expiredTime_s := strconv.Itoa(expiredTime)
-//    expiredTime = strconv.Itoa(expiredTime)
     /* Finally, write the token to the browser window */
     TokenData := `{"token":` + `"` + tokenString + `", ` + `"expired":"` + expiredTime_s +`"}`
     w.Write([]byte(TokenData+"\n"))
 
     }
-  })
+})
 
 var jwtMiddleware = jwtmiddleware.New(jwtmiddleware.Options{
   ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
@@ -181,6 +116,49 @@ func checkAuth(r *http.Request) bool {
     return username == os.Getenv("USERNAME") && password == os.Getenv("PASSWORD")
 }
 
+func execute(resp *http.Request) string {
+        // Getting request body as string.
+        b, err := ioutil.ReadAll(resp.Body)
+        if err == nil {
+                return string(b)
+        }
+        return ""
+}
+
+
+func runCmdStr(cmdstr string) error {
+    // Receiving post string which is shell command, And Slice Parse. 
+    c, err := shellwords.Parse(cmdstr)
+    if err != nil {
+        return err
+    }
+    switch len(c) {
+    case 0:
+        // nil
+        return nil
+    case 1:
+        // no option
+        fmt.Println(c[0])
+        err = sh.Command(c[0]).Run()
+    default:
+        // one or more option(It's main).
+        // shellwords.Parse() -> string[] -> interface{} ->sh.Command()
+		// Thank you for...
+		// http://qiita.com/tanksuzuki/items/9205ff70c57c4c03b5e5
+	    // https://golang.org/doc/faq#convert_slice_of_interface
+        s := make([]interface{}, len(c))
+        for i, v := range c {
+        s[i] = v
+        }
+        err = sh.Command(c[0], s[1:]...).Run()
+	}
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+
 func main() {
 
   r := mux.NewRouter()
@@ -194,3 +172,4 @@ func main() {
 
   http.ListenAndServe(":3000", r)
 }
+
