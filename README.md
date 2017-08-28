@@ -62,7 +62,7 @@ root@ubu-gobgpd:~# /root/go/bin/gobgp global rib -a ipv4
    Network              Next Hop             AS_PATH              Age        Attrs
 *> 10.0.0.1/32          0.0.0.0                                   00:02:01   [{Origin: i} {Med: 10} {LocalPref: 2000} {Communities: 100:100}]
 ```
-## ## Examples(Using go_gobgp_client)
+## Examples(Using go_gobgp_client)
 
 ```bash
 root@ubu-client:/go_gobgp_api/go_gobgp_client# go run main.go 
