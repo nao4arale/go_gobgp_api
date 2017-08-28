@@ -15,7 +15,7 @@ Now, Only Support BGP ipv4 flowspec.
 - logging announce prefix
 
 ## What you need
-- [Golang](https://golang.org/) (You may use later 1.7)
+- [Golang](https://golang.org/) (You shoud use version 1.7)
 - [Go BGP](https://github.com/osrg/gobgp/releases/latest).
 - [Throw Go BGP CLI](https://github.com/osrg/gobgp/blob/master/docs/sources/cli-command-syntax.md)
 
