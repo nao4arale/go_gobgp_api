@@ -25,6 +25,8 @@ func Env_load() {
 
     }
 }
+/* This HTTP Handler Thank you for...               */
+/* https://auth0.com/blog/authentication-in-golang/ */
 
 var StatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
 	if checkAuth(r) == false {
@@ -41,8 +43,10 @@ var JwkStatusHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Requ
 	w.Write([]byte("JWK is up and running\n"))
 })
 
-//var TestHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-//w.Write([]byte("Test"))})
+/* Debug Hundler
+var TestHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+w.Write([]byte("Test"))})
+*/
 
 var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
   //Validate request
@@ -59,11 +63,11 @@ var ReceiveCommandHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http
 	var s string
 		if err := scan.ScanJSON(js, "/command/", &s); err != nil {
 			}
-		
+
 	runCmdStr(s)
-  
+
 	w.WriteHeader(http.StatusOK)
-  
+ 
 })
 
   /* Set up a global string for our secret */
@@ -141,11 +145,13 @@ func runCmdStr(cmdstr string) error {
         fmt.Println(c[0])
         err = sh.Command(c[0]).Run()
     default:
-        // one or more option(It's main).
-        // shellwords.Parse() -> string[] -> interface{} ->sh.Command()
-		// Thank you for...
-		// http://qiita.com/tanksuzuki/items/9205ff70c57c4c03b5e5
-	    // https://golang.org/doc/faq#convert_slice_of_interface
+	/*                                                             */
+        /* one or more option(It's main).                              */
+        /* shellwords.Parse() -> string[] -> interface{} ->sh.Command()*/
+	/* Thank you for...                                            */
+	/* http://qiita.com/tanksuzuki/items/9205ff70c57c4c03b5e5      */
+        /* https://golang.org/doc/faq#convert_slice_of_interface       */
+	/*							       */
         s := make([]interface{}, len(c))
         for i, v := range c {
         s[i] = v
