@@ -16,7 +16,8 @@ func check_action(act_q string) string {
 	for {
 		precli_action := bufio.NewReader(os.Stdin)
 		fmt.Print(act_q)
-		cli_action, _ := precli_action.ReadString('\n')
+		cli_action, err := precli_action.ReadString('\n')
+		fatal(err)
 		cli_action = strings.Trim(cli_action, "\n")
 		switch cli_action {
 		case "add":
@@ -37,7 +38,8 @@ func check_protocols(proto_q string)  string {
 	for {
 		precli_protocols := bufio.NewReader(os.Stdin)
 		fmt.Print(proto_q)
-		cli_protocols, _ := precli_protocols.ReadString('\n')
+		cli_protocols, err := precli_protocols.ReadString('\n')
+		fatal(err)
 		cli_protocols = strings.Trim(cli_protocols, "\n")
 		switch cli_protocols {
 		case "tcp":
@@ -68,9 +70,7 @@ func check_then(then_q string) string {
 		precli_then := bufio.NewReader(os.Stdin)
 		fmt.Print(then_q)
 		cli_then, err := precli_then.ReadString('\n')
-			if err != nil {
-			fmt.Println(err)
-				os.Exit(1)	}
+		fatal(err)
 		cli_then = strings.Trim(cli_then, "\n")
 		 if strings.Contains(cli_then, " "){
 		  rateary := strings.SplitN(cli_then, " ", 2)

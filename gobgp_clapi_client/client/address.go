@@ -42,7 +42,8 @@ func numbers_checker(num_q string) (num_a string) {
 	for {
 		numb := bufio.NewReader(os.Stdin)
 		fmt.Print(num_q)
-		NUMB, _ := numb.ReadString('\n')
+		NUMB, err := numb.ReadString('\n')
+		fatal(err)
 		NUMB = strings.Trim(NUMB, "\n")
 		if NUMB == "" {
 			num_a = NUMB
@@ -67,7 +68,8 @@ func address_checker(add_q string) (add_a string) {
 	for {
 		addr := bufio.NewReader(os.Stdin)
 		fmt.Print(add_q)
-		ADDR, _ := addr.ReadString('\n')
+		ADDR, err := addr.ReadString('\n')
+		fatal(err)
 		ADDR = strings.Trim(ADDR, "\n")
 		if strings.Contains(ADDR, "/") {
 			addary := strings.SplitN(ADDR, "/", 2)

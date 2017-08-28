@@ -56,7 +56,8 @@ func Announce() {
 	for {
 		predoit := bufio.NewReader(os.Stdin)
 		fmt.Print("Do you want to POST this command??(y/n): ")
-		doit, _ := predoit.ReadString('\n')
+		doit, err := predoit.ReadString('\n')
+		fatal(err)
 		doit = strings.Trim(doit, "\n")
 		switch doit {
 		case "y":

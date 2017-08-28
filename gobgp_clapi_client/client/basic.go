@@ -1,6 +1,7 @@
 package client
 
 import (
+	"log"
 	"bufio"
 	"fmt"
 	"io/ioutil"
@@ -38,6 +39,11 @@ const (
 //        fmt.Printf("%s%s%s\n", s,str,CONSOLE_CLEAR)
 //}
 
+func fatal(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 func exists(filename string) bool {
 	_, err := os.Stat(filename)
@@ -46,9 +52,7 @@ func exists(filename string) bool {
 
 func cat(filename string) string {
 	buff, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return ""
-	}
+	fatal(err)
 	return string(buff)
 }
 
